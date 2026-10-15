@@ -1,4 +1,6 @@
+#include "inic.h"
 #include "global.h"
+#include "simbolos.h"
 
 struct entrada palsclave[] = {
     {"div", DIV},

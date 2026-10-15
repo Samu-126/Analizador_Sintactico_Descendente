@@ -1,7 +1,7 @@
+#include "emisor.h"
 #include "global.h"
 
-void emite(t, tval)		/* genera la salida */
-int t, tval;
+void emite(int t, int tval)		/* genera la salida */
 {
 	switch(t){
 		case '+': case '-': case '*': case '/':
@@ -11,9 +11,9 @@ int t, tval;
 		case MOD:
 			printf("MOD\n"); break;
 		case NUM:
-			printf("%d\n"); break;
+			printf("%d\n", tval); break;
 		case ID:
-			printf("%s\n", tval); break;
+			printf("%d\n", tval); break;
 		default:
 			printf("complex %d, valcomplex %d\n", t, tval);
 	}

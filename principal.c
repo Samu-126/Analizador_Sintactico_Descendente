@@ -1,8 +1,10 @@
-#include "global.h"
+#include <stdlib.h>
+#include "inic.h"
+#include "analizsint.h"
 
-main()
+int main()
 {
     inic();
-    análsint();
+    analsint();
     exit(0);    /* terminación con éxito */
 }

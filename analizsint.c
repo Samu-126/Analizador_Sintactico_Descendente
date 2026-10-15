@@ -1,11 +1,14 @@
 /**** analizsint.c *************************************************/
-
+#include "analizsint.h"
+#include "analizlex.h"
+#include "emisor.h"
+#include "_error.h"
 #include "global.h"
 
 int preanalisis;
 
 /* Funcion principal que arranca el analisis sintactico */
-void preanalisisSint()
+void analsint()
 {
     preanalisis = analex();
 

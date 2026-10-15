@@ -1,4 +1,7 @@
 #include "global.h"
+#include "analizlex.h"
+#include "_error.h"
+#include "simbolos.h"
 
 char buflex[TAMBUFF];
 int numlinea = 1;
@@ -31,7 +34,7 @@ int analex(){ /* analizador léxico */
 				ungetc(t, stdin);
 			p = busca(buflex);
 			if (p == 0)
-				p = insertar(buflex, ID);
+				p = inserta(buflex, ID);
 			valcomplex = p;
 			return tablasimb[p].complex;
 		}

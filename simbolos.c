@@ -1,3 +1,5 @@
+#include "simbolos.h"
+#include "_error.h"
 #include "global.h"
 #include <string.h>
 
