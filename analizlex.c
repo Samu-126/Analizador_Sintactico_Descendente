@@ -1,14 +1,14 @@
 #include "global.h"
 
 char buflex[TAMBUFF];
+int valcomplex;
 int numlinea = 1;
-int varcomplex = NINGUNO;
 
-int analex(){ /* analizador léxico */
+int analex(void){ /* analizador léxico */
 	int t;
 	while(1) {
 		t = getchar();
-		if (t == ' ' || t == '\t')
+		if (t == ' ' || t == '\t' || t == '\r')
 			;			/* elimina espacio en blanco */
 		else if (t == '\n')
 			numlinea = numlinea + 1;
@@ -31,7 +31,7 @@ int analex(){ /* analizador léxico */
 				ungetc(t, stdin);
 			p = busca(buflex);
 			if (p == 0)
-				p = insertar(buflex, ID);
+				p = inserta(buflex, ID);
 			valcomplex = p;
 			return tablasimb[p].complex;
 		}

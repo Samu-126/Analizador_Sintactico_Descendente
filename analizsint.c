@@ -2,10 +2,15 @@
 
 #include "global.h"
 
-int preanalisis;
+static int preanalisis;
+
+static void expr(void);
+static void termino(void);
+static void factor(void);
+static void parea(int t);
 
 /* Funcion principal que arranca el analisis sintactico */
-void preanalisisSint()
+void analsint(void)
 {
     preanalisis = analex();
 
@@ -17,7 +22,7 @@ void preanalisisSint()
 }
 
 /* Reconoce terminos separados por suma (+) o resta (-) */
-void expr()
+static void expr(void)
 {
     int t;
 
@@ -42,7 +47,7 @@ void expr()
 }
 
 /* Reconoce factores separados por multiplicacion (*), division (/), DIV o MOD */
-void termino()
+static void termino(void)
 {
     int t;
 
@@ -69,7 +74,7 @@ void termino()
 }
 
 /* Reconoce expresiones entre parentesis, numeros o identificadores */
-void factor()
+static void factor(void)
 {
     switch (preanalisis)
     {
@@ -96,7 +101,7 @@ void factor()
 }
 
 /* Comprueba el token actual y avanza */
-void parea(int t)
+static void parea(int t)
 {
     if (preanalisis == t)
         preanalisis = analex();

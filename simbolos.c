@@ -9,7 +9,7 @@ int ultcar = -1;
 struct entrada tablasimb[MAXSIMB];
 int ultent = 0;
 
-int busca(char s[])
+int busca(const char *s)
 {
     int p;
 
@@ -22,7 +22,7 @@ int busca(char s[])
     return 0;
 }
 
-int inserta(char s[], int clex)
+int inserta(const char *s, int clex)
 {
     int lon;
 
