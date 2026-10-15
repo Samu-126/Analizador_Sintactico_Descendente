@@ -1,8 +1,8 @@
 #include "global.h"
 
-main()
+int main(void)
 {
     inic();
-    análsint();
-    exit(0);    /* terminación con éxito */
+    analsint();
+    return 0;   /* terminación con éxito */
 }
