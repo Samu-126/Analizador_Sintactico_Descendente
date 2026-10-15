@@ -1,3 +1,3 @@
 #pragma once
 
-int analex();
+int analex(struct entrada *tablasimb, int *vp);

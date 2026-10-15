@@ -13,12 +13,7 @@
 #define ID      259
 #define FIN     260
 
-int valcomplex;
-int numlinea;
-
 struct entrada {
     char *aplex;
     int complex;
 };
-
-struct entrada tablasimb[];

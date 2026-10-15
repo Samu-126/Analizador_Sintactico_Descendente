@@ -3,15 +3,11 @@
 #include "global.h"
 #include <string.h>
 
-#define MAXLEX   999
-#define MAXSIMB  100
-
 char lexemas[MAXLEX];
 int ultcar = -1;
-struct entrada tablasimb[MAXSIMB];
 int ultent = 0;
 
-int busca(char s[])
+int busca(char s[], struct entrada *tablasimb)
 {
     int p;
 
@@ -24,7 +20,7 @@ int busca(char s[])
     return 0;
 }
 
-int inserta(char s[], int clex)
+int inserta(char s[], int clex, struct entrada *tablasimb)
 {
     int lon;
 

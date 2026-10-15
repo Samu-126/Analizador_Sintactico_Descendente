@@ -5,9 +5,9 @@
 
 char buflex[TAMBUFF];
 int numlinea = 1;
-int varcomplex = NINGUNO;
+int valcomplex = NINGUNO;
 
-int analex(){ /* analizador léxico */
+int analex(struct entrada *tablasimb, int *vp){ /* analizador léxico */
 	int t;
 	while(1) {
 		t = getchar();
@@ -15,7 +15,7 @@ int analex(){ /* analizador léxico */
 			;			/* elimina espacio en blanco */
 		else if (t == '\n')
 			numlinea = numlinea + 1;
-		else if (isdigit(t)){		/* t es una letra */
+		else if (isdigit(t)){		/* t es una dígito */
 			ungetc(t, stdin);
 			scanf("%d", &valcomplex);
 			return NUM;
@@ -32,10 +32,11 @@ int analex(){ /* analizador léxico */
 			buflex[b] = FDC;
 			if(t != EOF)
 				ungetc(t, stdin);
-			p = busca(buflex);
+			p = busca(buflex, tablasimb);
 			if (p == 0)
-				p = inserta(buflex, ID);
+				p = inserta(buflex, ID, tablasimb);
 			valcomplex = p;
+			*vp = valcomplex;
 			return tablasimb[p].complex;
 		}
 		else if (t == EOF)

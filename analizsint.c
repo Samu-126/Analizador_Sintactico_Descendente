@@ -8,23 +8,24 @@
 int preanalisis;
 
 /* Funcion principal que arranca el analisis sintactico */
-void analsint()
+void analsint(struct entrada *tablasimb)
 {
-    preanalisis = analex();
+    int valcomplex;
+    preanalisis = analex(tablasimb, &valcomplex);
 
     while (preanalisis != FIN)
     {
-        expr();
-        parea(';');
+        expr(tablasimb, valcomplex);
+        parea(';', tablasimb, valcomplex);
     }
 }
 
 /* Reconoce terminos separados por suma (+) o resta (-) */
-void expr()
+void expr(struct entrada *tablasimb, int valcomplex)
 {
     int t;
 
-    termino();
+    termino(tablasimb, valcomplex);
 
     while (1)
     {
@@ -33,8 +34,8 @@ void expr()
             case '+':
             case '-':
                 t = preanalisis;
-                parea(preanalisis);
-                termino();
+                parea(preanalisis,tablasimb, valcomplex);
+                termino(tablasimb, valcomplex);
                 emite(t, NINGUNO);
                 continue;
 
@@ -45,11 +46,11 @@ void expr()
 }
 
 /* Reconoce factores separados por multiplicacion (*), division (/), DIV o MOD */
-void termino()
+void termino(struct entrada *tablasimb, int valcomplex)
 {
     int t;
 
-    factor();
+    factor(tablasimb, valcomplex);
 
     while (1)
     {
@@ -60,8 +61,8 @@ void termino()
             case DIV:
             case MOD:
                 t = preanalisis;
-                parea(preanalisis);
-                factor();
+                parea(preanalisis, tablasimb, valcomplex);
+                factor(tablasimb, valcomplex);
                 emite(t, NINGUNO);
                 continue;
 
@@ -72,24 +73,24 @@ void termino()
 }
 
 /* Reconoce expresiones entre parentesis, numeros o identificadores */
-void factor()
+void factor(struct entrada *tablasimb, int valcomplex)
 {
     switch (preanalisis)
     {
         case '(':
-            parea('(');
-            expr();
-            parea(')');
+            parea('(', tablasimb, valcomplex);
+            expr(tablasimb, valcomplex);
+            parea(')', tablasimb, valcomplex);
             break;
 
         case NUM:
             emite(NUM, valcomplex);
-            parea(NUM);
+            parea(NUM, tablasimb, valcomplex);
             break;
 
         case ID:
             emite(ID, valcomplex);
-            parea(ID);
+            parea(ID, tablasimb, valcomplex);
             break;
 
         default:
@@ -99,10 +100,10 @@ void factor()
 }
 
 /* Comprueba el token actual y avanza */
-void parea(int t)
+void parea(int t, struct entrada *tablasimb, int valcomplex)
 {
     if (preanalisis == t)
-        preanalisis = analex();
+        preanalisis = analex(tablasimb, &valcomplex);
     else
         error("Error de sintaxis");
 }
